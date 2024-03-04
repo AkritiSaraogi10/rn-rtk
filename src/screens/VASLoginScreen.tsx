@@ -5,17 +5,20 @@ import {CustomInput} from '../components/FormInput';
 import {Text} from 'react-native-paper';
 import {CustomBtn} from '../components/btn';
 
-export const VASLoginScreen = () => {
+export const VASLoginScreen = ({navigation}) => {
   const {
     control,
     handleSubmit,
     formState: {errors},
   } = useForm();
 
-  const onForgot = () => {};
+  const onForgot = () => {
+    navigation.navigate('SignUpScreen');
+  };
 
-  const onLogin = (data: any) => {};
-
+  const onLogin = (data: any) => {
+    navigation.navigate('TabNav');
+  };
   return (
     <View style={styles.sectionContainer}>
       <ImageBackground

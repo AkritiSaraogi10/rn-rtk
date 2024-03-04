@@ -51,7 +51,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-//screen
-//redux tool kit implement
-//realm db
-//api call handling and showing data
