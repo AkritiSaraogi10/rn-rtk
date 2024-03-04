@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, FlatList} from 'react-native';
-import UserService from '../../network/services/user/userService';
-import UserInterface from '../../interface/userInterface';
+import UserService from '../network/services/user/userService';
+import UserInterface from '../interface/userInterface';
 import {useDispatch, useSelector} from 'react-redux';
 
 const UserView: React.FC = () => {

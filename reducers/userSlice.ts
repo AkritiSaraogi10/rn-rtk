@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import UserService from '../../network/services/user/userService';
-import UserInterface from '../../interface/userInterface';
+import UserService from '../network/services/user/userService';
+import UserInterface from '../interface/userInterface';
 
 interface UserState {
   users: UserInterface[];

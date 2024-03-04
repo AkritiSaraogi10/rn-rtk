@@ -5,7 +5,7 @@ import APIUriConfig from '../../apiConfig/appUriConfig';
 import APIResult from '../../../interface/resultInterface';
 import CustomError from '../../apiConfig/errorClass';
 import {Dispatch, UnknownAction} from '@reduxjs/toolkit';
-import {setErrorToast} from '../../../features/globalSlice';
+import {setErrorToast} from '../../../reducers/globalSlice';
 
 class UserService {
   static baseUrl = 'https://jsonplaceholder.typicode.com';

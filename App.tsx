@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import UserView from './features/user/userView';
+import UserView from './screens/userScreen';
 import {Provider} from 'react-redux';
 import store from './app/store';
 
