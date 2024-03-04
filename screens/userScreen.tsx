@@ -4,7 +4,7 @@ import UserService from '../network/services/user/userService';
 import UserInterface from '../interface/userInterface';
 import {useDispatch, useSelector} from 'react-redux';
 
-const UserView: React.FC = () => {
+const UserScreen: React.FC = () => {
   const [users, setUsers] = useState<UserInterface[]>([]);
   const errors = useSelector((state: any) => state.global.error);
   const dispatch = useDispatch();
@@ -33,4 +33,4 @@ const UserView: React.FC = () => {
   );
 };
 
-export default UserView;
+export default UserScreen;

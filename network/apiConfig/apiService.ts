@@ -2,7 +2,7 @@ import {AxiosError, AxiosResponse} from 'axios';
 import APIResult from '../../interface/resultInterface';
 import APIError from '../../interface/errorInterface';
 import CustomError from './errorClass';
-import CustomModal from '../../components/modal';
+import CustomModal from '../../components/customModal';
 
 interface doAPICallOptions<T> {
   api: () => Promise<AxiosResponse<T, any>>;
