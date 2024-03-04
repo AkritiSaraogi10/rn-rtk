@@ -2,6 +2,7 @@ import {AxiosError, AxiosResponse} from 'axios';
 import APIResult from '../../interface/resultInterface';
 import APIError from '../../interface/errorInterface';
 import CustomError from './errorClass';
+import CustomModal from '../../components/modal';
 
 // data class VasBaseResult<T>(
 //     @SerializedName("message") val message: String,
@@ -118,5 +119,22 @@ export async function doAPICall<T extends any>({
     };
     onFailure(error);
     throw new CustomError(error.code, error.message, error.description);
+  }
+}
+
+function handleStatusCode(error: APIError) {
+  const status = error.code;
+  if (
+    (status >= 300 && status < 400) ||
+    (status >= 400 && status < 500) ||
+    (status >= 500 && status < 600)
+  ) {
+    CustomModal({
+      message: error.message,
+      description: error.description,
+      onClose: () => console.log('Modal closed'),
+    });
+  } else {
+    console.error('Unhandled Error:', status);
   }
 }
