@@ -41,7 +41,6 @@ const CustomModal: React.FC = ({}) => {
   });
 
   return (
-    // <PaperProvider>
     <Portal>
       <Modal visible={error.status}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -64,7 +63,6 @@ const CustomModal: React.FC = ({}) => {
         </View>
       </Modal>
     </Portal>
-    // </PaperProvider>
   );
 };
 

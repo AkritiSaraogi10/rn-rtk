@@ -7,10 +7,4 @@ interface APIResult<T> {
   result: T;
 }
 
-// const book1 : Book={
-
-// }
-
-// const book2 = new Book()
-
 export default APIResult;

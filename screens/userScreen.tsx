@@ -1,26 +1,43 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, FlatList} from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
 import UserService from '../network/services/user/userService';
-import UserInterface from '../interface/userInterface';
-import {useDispatch, useSelector} from 'react-redux';
 
 const UserScreen: React.FC = () => {
-  const [users, setUsers] = useState<UserInterface[]>([]);
-  const errors = useSelector((state: any) => state.global.error);
   const dispatch = useDispatch();
+  const users = useSelector((state: any) => state.users.data);
+  const loading = useSelector((state: any) => state.users.loading);
+  const error = useSelector((state: any) => state.users.error);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const usersData = await UserService.getAllUsers(dispatch);
-        setUsers(usersData.result);
-      } catch (error) {
-        console.error('Error fetching users:', error);
+        await UserService.getAllUsers(dispatch);
+      } catch (err) {
+        console.error('Error fetching users:', err);
       }
     };
+
     fetchData();
   }, []);
-  console.log(errors);
+  console.log('error in tsx', error);
+
+  if (loading) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View>
+        <Text>Error: {error}</Text>
+      </View>
+    );
+  }
+
   return (
     <View>
       <Text>User List</Text>

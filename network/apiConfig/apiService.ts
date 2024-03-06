@@ -2,7 +2,8 @@ import {AxiosError, AxiosResponse} from 'axios';
 import APIResult from '../../interface/resultInterface';
 import APIError from '../../interface/errorInterface';
 import CustomError from './errorClass';
-import CustomModal from '../../components/customModal';
+import store from '../../app/store';
+import {setErrorToast} from '../../reducers/globalSlice';
 
 interface doAPICallOptions<T> {
   api: () => Promise<AxiosResponse<T, any>>;
@@ -47,6 +48,7 @@ export async function doAPICall<T extends any>({
       code: axiosError.response?.status || 500,
     };
     onFailure(error);
+    handleStatusCode(error);
     throw new CustomError(error.code, error.message, error.description);
   }
 }
@@ -58,11 +60,14 @@ function handleStatusCode(error: APIError) {
     (status >= 400 && status < 500) ||
     (status >= 500 && status < 600)
   ) {
-    CustomModal({
-      message: error.message,
-      description: error.description,
-      onClose: () => console.log('Modal closed'),
-    });
+    store.dispatch(
+      setErrorToast({message: error.message, status: true, code: status}),
+    );
+    // CustomModal({
+    //   message: error.message,
+    //   description: error.description,
+    //   onClose: () => console.log('Modal closed'),
+    // });
   } else {
     console.error('Unhandled Error:', status);
   }
