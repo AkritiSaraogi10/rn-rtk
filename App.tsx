@@ -5,6 +5,7 @@ import {Provider, useSelector} from 'react-redux';
 import store from './app/store';
 import CustomModal from './components/customModal';
 import {PaperProvider} from 'react-native-paper';
+import UserScreen from './screens/userScreen';
 
 const App: React.FC = () => {
   return (
@@ -12,7 +13,7 @@ const App: React.FC = () => {
       <PaperProvider>
         <Provider store={store}>
           <CustomModal />
-          <BottomNavBar />
+          <UserScreen />
         </Provider>
       </PaperProvider>
     </SafeAreaProvider>

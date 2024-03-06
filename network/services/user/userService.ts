@@ -23,7 +23,7 @@ class UserService {
       dispatch(setLoading(false));
       dispatch(setData([]));
     };
-    const uri = APIUriConfig.getUri(this.baseUrl, '/user');
+    const uri = APIUriConfig.getUri(this.baseUrl, '/users');
     const apiConfig = APIUriConfig.getHeaders();
     try {
       dispatch(setLoading(true));
