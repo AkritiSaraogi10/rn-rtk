@@ -63,11 +63,6 @@ function handleStatusCode(error: APIError) {
     store.dispatch(
       setErrorToast({message: error.message, status: true, code: status}),
     );
-    // CustomModal({
-    //   message: error.message,
-    //   description: error.description,
-    //   onClose: () => console.log('Modal closed'),
-    // });
   } else {
     console.error('Unhandled Error:', status);
   }

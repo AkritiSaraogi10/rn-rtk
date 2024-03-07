@@ -1,9 +1,13 @@
 import React, {useEffect} from 'react';
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import UserService from '../network/services/user/userService';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../navigation';
 
-const UserScreen: React.FC = () => {
+type UserScreenProps = NativeStackScreenProps<RootStackParamList, 'Users'>;
+
+const UserScreen: React.FC<UserScreenProps> = ({navigation}) => {
   const dispatch = useDispatch();
   const users = useSelector((state: any) => state.users.data);
   const loading = useSelector((state: any) => state.users.loading);
@@ -39,15 +43,24 @@ const UserScreen: React.FC = () => {
   }
 
   return (
-    <View>
+    <View style={{padding: 10}}>
       <Text>User List</Text>
       <FlatList
         data={users}
         keyExtractor={user => user.id.toString()}
-        renderItem={({item}) => <Text key={item.id}>{item.name}</Text>}
+        renderItem={({item}) => (
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('UsersDetails', {userId: item.id})
+            }>
+            <View>
+              <Text>{item.name}</Text>
+            </View>
+          </TouchableOpacity>
+        )}
       />
     </View>
   );
 };
 
-export default UserScreen; 
+export default UserScreen;

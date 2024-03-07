@@ -1,19 +1,16 @@
-import {StyleSheet, Text, View} from 'react-native';
-import BottomNavBar from './components/bottomNavBar';
+import {StyleSheet} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {Provider, useSelector} from 'react-redux';
+import {Provider} from 'react-redux';
 import store from './app/store';
-import CustomModal from './components/customModal';
 import {PaperProvider} from 'react-native-paper';
-import UserScreen from './screens/userScreen';
+import AppNavigator from './navigation';
 
 const App: React.FC = () => {
   return (
     <SafeAreaProvider>
       <PaperProvider>
         <Provider store={store}>
-          <CustomModal />
-          <UserScreen />
+          <AppNavigator />
         </Provider>
       </PaperProvider>
     </SafeAreaProvider>

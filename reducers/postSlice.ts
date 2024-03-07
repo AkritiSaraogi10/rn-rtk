@@ -1,43 +1,39 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
-import UserModel from '../interface/userModel';
+import PostModel from '../interface/postModel';
 
-interface UserState {
-  data: UserModel[];
-  getuser: UserModel | {}; //check
+interface PostState {
+  data: PostModel[];
   loading: boolean;
   error: string;
 }
 
 const userSlice = createSlice({
-  name: 'users',
+  name: 'posts',
   initialState: {
     data: [],
     loading: false,
     error: '',
-    getuser: {},
-  } as UserState,
+  } as PostState,
   reducers: {
-    setGetuserById: (state, action: PayloadAction<UserModel | {}>) => {
-      state.getuser = action.payload;
+    addPost: (state, action: PayloadAction<PostModel>) => {
+      state.data = [action.payload, ...state.data];
       state.loading = false;
       state.error = '';
     },
-    setData: (state, action: PayloadAction<UserModel[]>) => {
+    setData: (state, action: PayloadAction<PostModel[]>) => {
       state.data = action.payload;
       state.loading = false;
       state.error = '';
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
-      // state.error = '';
+      state.error = '';
     },
     setError: (state, action: PayloadAction<string>) => {
-      console.log('slice-->', action.payload);
       state.loading = false;
       state.error = action.payload;
     },
   },
 });
-export const {setData, setLoading, setError, setGetuserById} =
-  userSlice.actions;
+export const {setData, setLoading, setError, addPost} = userSlice.actions;
 export default userSlice.reducer;
