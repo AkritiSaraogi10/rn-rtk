@@ -57,7 +57,11 @@ const DetailsScreen: React.FC<DetailsScreenProps> = ({route, navigation}) => {
       <Button title="Go back" onPress={() => navigation.goBack()} />
       <Button
         title="Go to post screen"
-        onPress={() => navigation.navigate('Posts')}
+        onPress={() =>
+          navigation.navigate('Posts', {
+            userId: userId,
+          })
+        }
       />
     </View>
   );

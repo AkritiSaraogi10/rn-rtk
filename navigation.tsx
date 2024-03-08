@@ -8,7 +8,7 @@ import PostScreen from './screens/postScreen';
 export type RootStackParamList = {
   Users: undefined;
   UsersDetails: {userId: number};
-  Posts: undefined;
+  Posts: {userId: number};
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

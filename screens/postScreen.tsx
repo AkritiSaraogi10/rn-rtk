@@ -10,11 +10,13 @@ import PostRequestModel from '../requestModels/postRequestModel';
 type PostsScreenProps = NativeStackScreenProps<RootStackParamList, 'Posts'>;
 
 const PostScreen: React.FC<PostsScreenProps> = ({route, navigation}) => {
+  const {userId} = route.params;
   const dispatch = useDispatch();
   const posts = useSelector((state: any) => state.posts.data);
   const loading = useSelector((state: any) => state.posts.loading);
   const error = useSelector((state: any) => state.posts.error);
   const [newPostTitle, setNewPostTitle] = useState('');
+  const [newPostBody, setNewPostBody] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +31,11 @@ const PostScreen: React.FC<PostsScreenProps> = ({route, navigation}) => {
 
   const addPost = async () => {
     try {
-      const postRequestModel = new PostRequestModel(newPostTitle, '', 7);
+      const postRequestModel = new PostRequestModel(
+        newPostTitle,
+        newPostBody,
+        userId,
+      );
       await PostService.addPost(dispatch, postRequestModel);
       setNewPostTitle('');
     } catch (error) {
@@ -54,17 +60,27 @@ const PostScreen: React.FC<PostsScreenProps> = ({route, navigation}) => {
   return (
     <View style={{padding: 10}}>
       <TextInput
+        style={{margin: 5}}
         label="New Post Title"
         value={newPostTitle}
         onChangeText={text => setNewPostTitle(text)}
       />
 
-      <Button mode="contained" onPress={() => navigation.goBack()}>
-        Goback
+      <TextInput
+        label="New Post Body"
+        style={{margin: 5}}
+        value={newPostBody}
+        onChangeText={text => setNewPostBody(text)}
+      />
+      <Button mode="contained" onPress={addPost} style={{margin: 5}}>
+        {loading ? ' Loading..' : 'Add post'}
       </Button>
 
-      <Button mode="contained" onPress={addPost}>
-        {loading ? ' Loading..' : 'Add post'}
+      <Button
+        mode="contained"
+        style={{margin: 5}}
+        onPress={() => navigation.goBack()}>
+        Goback
       </Button>
 
       <Text>Posts List</Text>
