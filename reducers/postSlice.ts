@@ -1,5 +1,5 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
-import PostModel from '../interface/postModel';
+import PostModel from '../models/postModel';
 
 interface PostState {
   data: PostModel[];

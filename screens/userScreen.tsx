@@ -24,7 +24,6 @@ const UserScreen: React.FC<UserScreenProps> = ({navigation}) => {
 
     fetchData();
   }, []);
-  console.log('error in tsx', error);
 
   if (loading) {
     return (

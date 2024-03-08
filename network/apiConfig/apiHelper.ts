@@ -1,7 +1,7 @@
 import axios, {AxiosRequestConfig} from 'axios';
-import APIError from '../../interface/errorInterface';
+import APIError from '../../interfaces/errorInterface';
 import {doAPICall} from './apiService';
-import APIResult from '../../interface/resultInterface';
+import APIResult from '../../interfaces/resultInterface';
 import CustomError from './errorClass';
 
 class ApiHelper {

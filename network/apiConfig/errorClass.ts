@@ -1,4 +1,4 @@
-import APIError from '../../interface/errorInterface';
+import APIError from '../../interfaces/errorInterface';
 
 class CustomError extends Error implements APIError {
   constructor(code: number, message: string, description: string = '') {

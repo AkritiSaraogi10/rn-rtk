@@ -1,6 +1,6 @@
 import {AxiosError, AxiosResponse} from 'axios';
-import APIResult from '../../interface/resultInterface';
-import APIError from '../../interface/errorInterface';
+import APIResult from '../../interfaces/resultInterface';
+import APIError from '../../interfaces/errorInterface';
 import CustomError from './errorClass';
 import store from '../../app/store';
 import {setErrorToast} from '../../reducers/globalSlice';

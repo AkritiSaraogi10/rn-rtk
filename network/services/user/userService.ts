@@ -1,9 +1,9 @@
-import APIError from '../../../interface/errorInterface';
+import APIError from '../../../interfaces/errorInterface';
 import ApiHelper from '../../apiConfig/apiHelper';
 import APIUriConfig from '../../apiConfig/appUriConfig';
-import APIResult from '../../../interface/resultInterface';
+import APIResult from '../../../interfaces/resultInterface';
 import CustomError from '../../apiConfig/errorClass';
-import UserModel from '../../../interface/userModel';
+import UserModel from '../../../models/userModel';
 import {
   setData,
   setError,

@@ -1,10 +1,10 @@
-import APIError from '../../../interface/errorInterface';
+import APIError from '../../../interfaces/errorInterface';
 import ApiHelper from '../../apiConfig/apiHelper';
 import APIUriConfig from '../../apiConfig/appUriConfig';
-import APIResult from '../../../interface/resultInterface';
+import APIResult from '../../../interfaces/resultInterface';
 import CustomError from '../../apiConfig/errorClass';
 import PostRequestModel from '../../../requestModels/postRequestModel';
-import PostModel from '../../../interface/postModel';
+import PostModel from '../../../models/postModel';
 import {Dispatch, UnknownAction} from '@reduxjs/toolkit';
 import {
   setData,
@@ -51,7 +51,6 @@ class PostService {
       console.log('Result-->', result);
     };
     const onFailure = (error: APIError) => {
-      dispatch(setLoading(false));
       dispatch(setError(error.message));
       console.error('Error--> ' + error.message);
     };
