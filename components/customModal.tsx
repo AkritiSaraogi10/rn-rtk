@@ -1,26 +1,16 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {setErrorToast} from '../reducers/globalSlice';
-import {Portal, Modal, PaperProvider} from 'react-native-paper';
-
-// interface CustomModalProps {
-//   message: string;
-//   description: string;
-//   onClose: () => void;
-// }
+import {Portal, Modal} from 'react-native-paper';
 
 const CustomModal: React.FC = ({}) => {
-  const [isVisible, setIsVisible] = useState(true);
   const error = useSelector((state: any) => state.global.error);
   const dispatch = useDispatch();
 
   const closeModal = () => {
     dispatch(setErrorToast({status: false, message: ''}));
-    // setIsVisible(false);
-    // onClose();
   };
-  console.log('custom---> ', error);
 
   const styles = StyleSheet.create({
     button: {

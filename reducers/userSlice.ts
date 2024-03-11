@@ -29,10 +29,8 @@ const userSlice = createSlice({
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
-      // state.error = '';
     },
     setError: (state, action: PayloadAction<string>) => {
-      console.log('slice-->', action.payload);
       state.loading = false;
       state.error = action.payload;
     },
