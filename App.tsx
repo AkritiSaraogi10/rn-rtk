@@ -1,51 +1,51 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import UserView from './screens/userScreen';
-import {Provider} from 'react-redux';
-import store from './app/store';
-import {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {useEffect} from 'react';
 import NetInfo from '@react-native-community/netinfo';
 import {Snackbar} from 'react-native-paper';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import { setHasInternet, setNetworkVisibleToast } from './reducers/globalSlice';
 
 const App: React.FC = () => {
-  const [isConnected, setConnected] = useState(true);
-  const [visible, setVisible] = useState(false);
+  const dispatch = useDispatch();
+  const hasInternet = useSelector((state: { global: { hasInternet: boolean } }) => state.global.hasInternet);
+  const visibleToast = useSelector((state: { global: { visible: boolean } }) => state.global.visible);
 
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener(state => {
       if (
         ((state.isConnected && state.isInternetReachable) || false) !==
-        isConnected
+        hasInternet
       ) {
-        setVisible(true);
+        dispatch(setNetworkVisibleToast(true));
       }
-      setConnected((state.isConnected && state.isInternetReachable) || false);
+      dispatch(setHasInternet((state.isConnected && state.isInternetReachable) || false));
     });
 
     return () => {
       unsubscribe();
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <Provider store={store}>
       <SafeAreaProvider>
         <View style={styles.container}>
           <UserView />
           <Snackbar
-            visible={visible}
-            onDismiss={() => setVisible(false)}
+            visible={visibleToast}
+            onDismiss={() => dispatch(setNetworkVisibleToast(false))}
             action={{
               label: 'ok',
               onPress: () => {
                 // Do something
               },
             }}>
-            {isConnected ? 'Back Online' : 'You are offline'}
+            {hasInternet ? 'Connection Restored' : 'Network Unavailable'}
           </Snackbar>
         </View>
       </SafeAreaProvider>
-    </Provider>
   );
 };
 

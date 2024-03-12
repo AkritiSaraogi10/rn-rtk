@@ -10,9 +10,12 @@ import {
 interface ICustomScrollViewProps {
   children: JSX.Element;
   height: DimensionValue;
+  showsVerticalScrollIndicator?: boolean;
+  horizontal?: boolean;
+  showsHorizontalScrollIndicator?: boolean;
 }
 
-const CustomScrollView = ({children, height}: ICustomScrollViewProps) => {
+const CustomScrollView = ({children, height, showsHorizontalScrollIndicator, showsVerticalScrollIndicator, horizontal}: ICustomScrollViewProps) => {
   const lastScrollPosition = useRef(0);
   const styles = StyleSheet.create({
     container: {height: height ?? '100%', backgroundColor: 'white'},
@@ -21,7 +24,7 @@ const CustomScrollView = ({children, height}: ICustomScrollViewProps) => {
     <>
       <View style={styles.container}>
         <ScrollView
-          showsVerticalScrollIndicator={true}
+        showsVerticalScrollIndicator={showsVerticalScrollIndicator}
           keyboardShouldPersistTaps="handled"
           onScrollBeginDrag={event => {
             const currentScrollPosition = event.nativeEvent.contentOffset.y;
@@ -31,7 +34,9 @@ const CustomScrollView = ({children, height}: ICustomScrollViewProps) => {
               }
             }
             lastScrollPosition.current = currentScrollPosition;
-          }}>
+          }}
+          horizontal={horizontal}
+          showsHorizontalScrollIndicator={showsHorizontalScrollIndicator}>
           {children}
         </ScrollView>
       </View>
